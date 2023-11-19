@@ -1,3 +1,6 @@
+package tests;
+
+import data.Language;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +23,7 @@ public class WebTests {
     @ValueSource(strings = {
             "Selenide", "JUnit 5", "Allure"
     })
-    @ParameterizedTest(name="For found {0}")
+    @ParameterizedTest(name="For found {0} on startpage.com")
     @Tag("BLOCKER")
     void searchResultsShouldNotBeEmpty(String searchQuery){
         $("#q").setValue(searchQuery).pressEnter();
@@ -40,7 +43,7 @@ public class WebTests {
                 .shouldHave(text(expectedLink));
     }
 
-    @Tag("BLOCKER")
+    @Tag("BLOCKER2")
     @EnumSource(Language.class)
     @ParameterizedTest
         //@DisplayName("For found junit 5")
@@ -57,6 +60,5 @@ public class WebTests {
         $("#q").setValue(language.description).pressEnter();
         $("#q").shouldHave(text(language.description));
     }
-
 
 }
