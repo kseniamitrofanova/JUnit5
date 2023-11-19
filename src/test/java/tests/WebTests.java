@@ -23,7 +23,7 @@ public class WebTests {
     @ValueSource(strings = {
             "Selenide", "JUnit 5", "Allure"
     })
-    @ParameterizedTest(name="For found {0} on startpage.com")
+    @ParameterizedTest(name="For a search query, {0} should not give an empty list of cards")
     @Tag("BLOCKER")
     void searchResultsShouldNotBeEmpty(String searchQuery){
         $("#q").setValue(searchQuery).pressEnter();
@@ -35,7 +35,7 @@ public class WebTests {
             "Selenide, https://selenide.org/",
             "JUnit 5, https://junit.org"
     })
-    @ParameterizedTest(name="For found {0} in first card {1}")
+    @ParameterizedTest(name="For a search query {0}, the first card must have a link {1}")
     @Tag("BLOCKER")
     void searchResultsShouldContainExpectedUrl(String searchQuery, String expectedLink){
         $("#q").setValue(searchQuery).pressEnter();
@@ -43,20 +43,11 @@ public class WebTests {
                 .shouldHave(text(expectedLink));
     }
 
-    @Tag("BLOCKER2")
-    @EnumSource(Language.class)
-    @ParameterizedTest
-        //@DisplayName("For found junit 5")
-    void successfulSearchWithEnum(Language language){
-        $("#q").setValue(language.description).pressEnter();
-        $$("[class='w-gl__result__main']")
-                .shouldBe(sizeGreaterThan(0));
-    }
-
     @Tag("BLOCKER")
     @EnumSource(Language.class)
-    @ParameterizedTest
+    @ParameterizedTest (name="When searching, the search bar should not be empty")
     void successfulSearchTwo(Language language){
+        System.out.println(language.description);
         $("#q").setValue(language.description).pressEnter();
         $("#q").shouldHave(text(language.description));
     }
