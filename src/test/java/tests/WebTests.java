@@ -26,7 +26,7 @@ public class WebTests {
     })
     @ParameterizedTest(name="For a search query, {0} should not give an empty list of cards")
     @Tag("BLOCKER")
-    void searchResultsShouldNotBeEmpty(String searchQuery){
+    void searchResultsShouldNotBeEmptyTest(String searchQuery){
         $("#q").setValue(searchQuery).pressEnter();
         $$("[class='w-gl__result__main']")
                 .shouldBe(sizeGreaterThan(0));
@@ -38,7 +38,7 @@ public class WebTests {
     })
     @ParameterizedTest(name="For a search query {0}, the first card must have a link {1}")
     @Tag("BLOCKER")
-    void searchResultsShouldContainExpectedUrl(String searchQuery, String expectedLink){
+    void searchResultsShouldContainExpectedUrlTest(String searchQuery, String expectedLink){
         $("#q").setValue(searchQuery).pressEnter();
         $("[class='w-gl__result-url result-link']")
                 .shouldHave(text(expectedLink));
@@ -47,7 +47,7 @@ public class WebTests {
     @Tag("BLOCKER")
     @EnumSource(Language.class)
     @ParameterizedTest (name="When searching, the search bar should not be empty")
-    void successfulSearchTwo(Language language){
+    void successfulSearchTwoTest(Language language){
         System.out.println(language.description);
         $("#q").setValue(language.description).pressEnter();
         $("[class='sx-kp-short-extract sx-kp-short-extract-nontruncated']").shouldHave(text(language.description));
