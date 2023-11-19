@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.CollectionCondition;
 import data.Language;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -49,7 +50,7 @@ public class WebTests {
     void successfulSearchTwo(Language language){
         System.out.println(language.description);
         $("#q").setValue(language.description).pressEnter();
-        $("#q").shouldHave(text(language.description));
+        $("[class='sx-kp-short-extract sx-kp-short-extract-nontruncated']").shouldHave(text(language.description));
     }
 
 }
